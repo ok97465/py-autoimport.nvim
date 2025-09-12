@@ -1,0 +1,347 @@
+{
+    "alias": {
+        "np": "numpy",
+        "ne": "numexpr3",
+        "nb": "numba",
+        "plt": "matplotlib.pyplot",
+        "osp": "os.path",
+        "sp": "scipy",
+        "spc": "scipy.constants",
+        "pd": "pandas",
+        "mpl": "matplotlib",
+        "re": "re",
+        "os": "os",
+        "cv2": "cv2",
+        "struct": "struct",
+        "sys": "sys",
+        "itertools": "itertools",
+        "ctypes": "ctypes"
+    },
+    "module": {
+        "types": [
+            "SimpleNamespace"
+        ],
+        "dataclasses": [
+            "dataclass"
+        ],
+        "collections": [
+            "defaultdict"
+        ],
+        "time": [
+            "sleep"
+        ],
+        "struct": [
+            "unpack",
+            "pack"
+        ],
+        "copy": [
+            "deepcopy"
+        ],
+        "ctypes": [
+            "sizeof"
+        ],
+        "itertools": [
+            "product",
+            "zip_longest"
+        ],
+        "IPython": [
+            "get_ipython"
+        ],
+        "multiprocessing.pool": [
+            "ThreadPool",
+            "Pool"
+        ],
+        "typing": [
+            "NamedTuple",
+            "Optional",
+            "Union"
+        ],
+        "numexpr3": [
+            "evaluate"
+        ],
+        "numba": [
+            "njit",
+            "prange"
+        ],
+        "numpy": [
+            "asarray",
+            "ndarray",
+            "divmod",
+            "pi",
+            "newaxis",
+            "fromstring",
+            "fromfile",
+            "frombuffer",
+            "deg2rad",
+            "rad2deg",
+            "conj",
+            "copysign",
+            "flipud",
+            "fliplr",
+            "fix",
+            "log",
+            "log10",
+            "log2",
+            "matmul",
+            "int8",
+            "uint8",
+            "int16",
+            "uint16",
+            "int32",
+            "uint32",
+            "int64",
+            "uint64",
+            "float32",
+            "float64",
+            "complex64",
+            "complex128",
+            "fmin",
+            "fmax",
+            "gcd",
+            "isfinite",
+            "isinf",
+            "isnan",
+            "isnat",
+            "lcm",
+            "not_equal",
+            "right_shift",
+            "sign",
+            "signbit",
+            "equal",
+            "floor",
+            "exp",
+            "arange",
+            "array",
+            "zeros",
+            "absolute",
+            "arccos",
+            "arccosh",
+            "arcsin",
+            "arcsinh",
+            "arctan",
+            "arctan2",
+            "arctanh",
+            "bitwise_and",
+            "bitwise_or",
+            "bitwise_xor",
+            "concatenate",
+            "inner",
+            "ceil",
+            "dot",
+            "outer",
+            "cos",
+            "cosh",
+            "sin",
+            "sinh",
+            "sqrt",
+            "tan",
+            "tanh",
+            "where",
+            "alltrue",
+            "empty",
+            "left_shift",
+            "logical_and",
+            "logical_not",
+            "logical_or",
+            "logical_xor"
+        ],
+        "numpy.typing":[
+            "NDArray"
+        ],
+        "numpy.polynomial.polynomial": [
+            "polyfit",
+            "polyval"
+        ],
+        "numpy.lib.npyio": [
+            "savez"
+        ],
+        "mkl_random": [
+            "binomial",
+            "chisquare",
+            "choice",
+            "dirichlet",
+            "exponential",
+            "gamma",
+            "lognormal",
+            "permutation",
+            "poisson",
+            "rand",
+            "randint",
+            "randn",
+            "random_integers",
+            "rayleigh",
+            "shuffle",
+            "standard_cauchy",
+            "standard_exponential",
+            "standard_gamma",
+            "standard_normal",
+            "standard_t",
+            "uniform",
+            "vonmises",
+            "wald",
+            "weibull",
+            "zipf"
+        ],
+        "numpy.fft": [
+            "fftshift",
+            "ifftshift",
+            "fftfreq"
+        ],
+        "mkl_fft": [
+            "fft",
+            "ifft",
+            "fft2",
+            "ifft2"
+        ],
+        "numpy.core.multiarray": [
+            "vdot",
+            "unravel_index"
+        ],
+        "numpy.core.numeric": [
+            "zeros_like",
+            "empty_like",
+            "count_nonzero",
+            "argwhere",
+            "correlate",
+            "convolve",
+            "roll",
+            "rollaxis",
+            "moveaxis",
+            "cross",
+            "tensordot",
+            "array_equal",
+            "array_equiv",
+            "indices",
+            "isclose",
+            "isscalar",
+            "ones",
+            "identity",
+            "allclose"
+        ],
+        "numpy.core.fromnumeric": [
+            "all",
+            "amax",
+            "amin",
+            "any",
+            "argmax",
+            "argmin",
+            "argpartition",
+            "argsort",
+            "around",
+            "cumprod",
+            "cumsum",
+            "diagonal",
+            "ndim",
+            "nonzero",
+            "prod",
+            "ravel",
+            "repeat",
+            "reshape",
+            "std",
+            "sum",
+            "var"
+        ],
+        "numpy.core.function_base": [
+            "linspace"
+        ],
+        "numpy.lib.function_base": [
+            "diff",
+            "unwrap",
+            "angle",
+            "median",
+            "sinc",
+            "hamming",
+            "hanning",
+            "bartlett",
+            "blackman",
+            "kaiser",
+            "trapz",
+            "meshgrid",
+            "interp"
+        ],
+        "numpy.core.shape_base": [
+            "vstack",
+            "hstack"
+        ],
+        "numpy.lib.shape_base": [
+            "tile"
+        ],
+        "numpy.linalg": [
+            "norm",
+            "inv",
+            "det",
+            "pinv",
+            "eig",
+            "svd",
+            "qr",
+            "matrix_rank"
+        ],
+        "scipy.special": [
+            "sindg",
+            "cosdg",
+            "tandg"
+        ],
+        "scipy.constants": [
+            "speed_of_light"
+        ],
+        "scipy.fftpack": [
+            "next_fast_len"
+        ],
+        "scipy.signal": [
+            "resample",
+            "periodogram",
+            "argrelmax",
+            "argrelmin",
+            "firls",
+            "freqz"
+        ],
+        "scipy.linalg": [
+            "lu"
+        ],
+        "scipy.interpolate": [
+            "InterpolatedUnivariateSpline"
+        ],
+        "scipy.io": [
+            "loadmat",
+            "savemat"
+        ],
+        "mayavi": [
+            "mlab"
+        ],
+        "mpl_toolkits.mplot3d": [
+            "Axes3D"
+        ],
+        "matplotlib.pyplot": [
+            "figure",
+            "plot",
+            "hist",
+            "subplots",
+            "imshow",
+            "xkcd"
+        ],
+        "pymap3d": [
+            "geodetic2ecef",
+            "ecef2geodetic",
+            "enu2ecef",
+            "ecef2enu",
+            "ned2ecef",
+            "ned2geodetic",
+            "geodetic2ned",
+            "ecef2ned",
+            "enu2geodetic",
+            "geodetic2enu",
+            "vdist",
+            "vreckon"
+        ],
+        "jupyterthemes": [
+            "jtplot"
+        ],
+        "pprint": [
+            "pprint"
+        ],
+        "tqdm": [
+            "trange"
+        ]
+    }
+}
+
