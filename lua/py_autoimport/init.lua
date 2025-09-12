@@ -55,15 +55,15 @@ local function build_rg_command(symbol)
   local cfg = util.get_config()
   local parts = {}
   -- def symbol(
-  table.insert(parts, ('^def\s+%s\s*\('):format(vim.pesc(symbol)))
+  table.insert(parts, '^def[[:space:]]+' .. vim.pesc(symbol) .. '[[:space:]]*[(]')
   -- class Symbol( or class Symbol:
-  table.insert(parts, ('^class\s+%s[%s:(]'):format(vim.pesc(symbol)))
+  table.insert(parts, '^class[[:space:]]+' .. vim.pesc(symbol) .. '[[:space:]:(]')
   if cfg.search.include_variables then
-    local base = ('^%s\s*'):format(vim.pesc(symbol))
+    local base = ('^%s[[:space:]]*'):format(vim.pesc(symbol))
     if cfg.search.include_annotations_without_value then
       table.insert(parts, base .. ':')
     end
-    table.insert(parts, base .. '(:[^=]+)?%s*=')
+    table.insert(parts, base .. '(:[^=]+)?[[:space:]]*=')
   end
 
   local cli = {}
