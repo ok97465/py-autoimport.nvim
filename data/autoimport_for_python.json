@@ -18,21 +18,13 @@
         "ctypes": "ctypes"
     },
     "module": {
-        "types": [
-            "SimpleNamespace"
-        ],
-        "dataclasses": [
-            "dataclass"
+        "IPython": [
+            "get_ipython"
         ],
         "collections": [
-            "defaultdict"
-        ],
-        "time": [
-            "sleep"
-        ],
-        "struct": [
-            "unpack",
-            "pack"
+            "defaultdict",
+            "deque",
+            "Counter"
         ],
         "copy": [
             "deepcopy"
@@ -40,28 +32,118 @@
         "ctypes": [
             "sizeof"
         ],
+        "dataclasses": [
+            "dataclass",
+            "field"
+        ],
+        "functools": [
+            "lru_cache",
+            "partial"
+        ],
         "itertools": [
             "product",
-            "zip_longest"
+            "zip_longest",
+            "chain",
+            "islice"
         ],
-        "IPython": [
-            "get_ipython"
+        "jupyterthemes": [
+            "jtplot"
+        ],
+        "matplotlib.axes": [
+            "Axes"
+        ],
+        "matplotlib.axis": [
+            "Axis"
+        ],
+        "matplotlib.cm": [
+            "ScalarMappable"
+        ],
+        "matplotlib.colorbar": [
+            "Colorbar"
+        ],
+        "matplotlib.colors": [
+            "Colormap",
+            "Normalize"
+        ],
+        "matplotlib.figure": [
+            "Figure"
+        ],
+        "matplotlib.gridspec": [
+            "GridSpec"
+        ],
+        "matplotlib.lines": [
+            "Line2D"
+        ],
+        "matplotlib.patches": [
+            "Polygon",
+            "Patch",
+            "Rectangle",
+            "Circle"
+        ],
+        "matplotlib.path": [
+            "Path"
+        ],
+        "matplotlib.pyplot": [
+            "figure",
+            "plot",
+            "hist",
+            "subplots",
+            "imshow",
+            "xkcd"
+        ],
+        "matplotlib.ticker": [
+            "FuncFormatter",
+            "MaxNLocator"
+        ],
+        "mayavi": [
+            "mlab"
+        ],
+        "mkl_fft": [
+            "fft",
+            "ifft",
+            "fft2",
+            "ifft2"
+        ],
+        "mkl_random": [
+            "binomial",
+            "chisquare",
+            "choice",
+            "dirichlet",
+            "exponential",
+            "gamma",
+            "lognormal",
+            "permutation",
+            "poisson",
+            "rand",
+            "randint",
+            "randn",
+            "random_integers",
+            "rayleigh",
+            "shuffle",
+            "standard_cauchy",
+            "standard_exponential",
+            "standard_gamma",
+            "standard_normal",
+            "standard_t",
+            "uniform",
+            "vonmises",
+            "wald",
+            "weibull",
+            "zipf"
+        ],
+        "mpl_toolkits.mplot3d": [
+            "Axes3D"
         ],
         "multiprocessing.pool": [
             "ThreadPool",
             "Pool"
         ],
-        "typing": [
-            "NamedTuple",
-            "Optional",
-            "Union"
-        ],
-        "numexpr3": [
-            "evaluate"
-        ],
         "numba": [
             "njit",
             "prange"
+        ],
+        "numexpr3": [
+            "evaluate"
         ],
         "numpy": [
             "asarray",
@@ -143,61 +225,12 @@
             "logical_and",
             "logical_not",
             "logical_or",
-            "logical_xor"
-        ],
-        "numpy.typing":[
-            "NDArray"
-        ],
-        "numpy.polynomial.polynomial": [
+            "logical_xor",
             "polyfit",
-            "polyval"
-        ],
-        "numpy.lib.npyio": [
-            "savez"
-        ],
-        "mkl_random": [
-            "binomial",
-            "chisquare",
-            "choice",
-            "dirichlet",
-            "exponential",
-            "gamma",
-            "lognormal",
-            "permutation",
-            "poisson",
-            "rand",
-            "randint",
-            "randn",
-            "random_integers",
-            "rayleigh",
-            "shuffle",
-            "standard_cauchy",
-            "standard_exponential",
-            "standard_gamma",
-            "standard_normal",
-            "standard_t",
-            "uniform",
-            "vonmises",
-            "wald",
-            "weibull",
-            "zipf"
-        ],
-        "numpy.fft": [
-            "fftshift",
-            "ifftshift",
-            "fftfreq"
-        ],
-        "mkl_fft": [
-            "fft",
-            "ifft",
-            "fft2",
-            "ifft2"
-        ],
-        "numpy.core.multiarray": [
+            "polyval",
+            "savez",
             "vdot",
-            "unravel_index"
-        ],
-        "numpy.core.numeric": [
+            "unravel_index",
             "zeros_like",
             "empty_like",
             "count_nonzero",
@@ -216,9 +249,7 @@
             "isscalar",
             "ones",
             "identity",
-            "allclose"
-        ],
-        "numpy.core.fromnumeric": [
+            "allclose",
             "all",
             "amax",
             "amin",
@@ -239,12 +270,8 @@
             "reshape",
             "std",
             "sum",
-            "var"
-        ],
-        "numpy.core.function_base": [
-            "linspace"
-        ],
-        "numpy.lib.function_base": [
+            "var",
+            "linspace",
             "diff",
             "unwrap",
             "angle",
@@ -257,14 +284,15 @@
             "kaiser",
             "trapz",
             "meshgrid",
-            "interp"
-        ],
-        "numpy.core.shape_base": [
+            "interp",
             "vstack",
-            "hstack"
-        ],
-        "numpy.lib.shape_base": [
+            "hstack",
             "tile"
+        ],
+        "numpy.fft": [
+            "fftshift",
+            "ifftshift",
+            "fftfreq"
         ],
         "numpy.linalg": [
             "norm",
@@ -276,48 +304,21 @@
             "qr",
             "matrix_rank"
         ],
-        "scipy.special": [
-            "sindg",
-            "cosdg",
-            "tandg"
+        "numpy.typing": [
+            "NDArray",
+            "ArrayLike"
         ],
-        "scipy.constants": [
-            "speed_of_light"
+        "pandas": [
+            "DataFrame",
+            "Series",
+            "Index"
         ],
-        "scipy.fftpack": [
-            "next_fast_len"
+        "pathlib": [
+            "Path"
         ],
-        "scipy.signal": [
-            "resample",
-            "periodogram",
-            "argrelmax",
-            "argrelmin",
-            "firls",
-            "freqz"
-        ],
-        "scipy.linalg": [
-            "lu"
-        ],
-        "scipy.interpolate": [
-            "InterpolatedUnivariateSpline"
-        ],
-        "scipy.io": [
-            "loadmat",
-            "savemat"
-        ],
-        "mayavi": [
-            "mlab"
-        ],
-        "mpl_toolkits.mplot3d": [
-            "Axes3D"
-        ],
-        "matplotlib.pyplot": [
-            "figure",
-            "plot",
-            "hist",
-            "subplots",
-            "imshow",
-            "xkcd"
+        "pprint": [
+            "pprint",
+            "pformat"
         ],
         "pymap3d": [
             "geodetic2ecef",
@@ -333,15 +334,57 @@
             "vdist",
             "vreckon"
         ],
-        "jupyterthemes": [
-            "jtplot"
+        "scipy.constants": [
+            "speed_of_light"
         ],
-        "pprint": [
-            "pprint"
+        "scipy.fftpack": [
+            "next_fast_len"
+        ],
+        "scipy.interpolate": [
+            "InterpolatedUnivariateSpline"
+        ],
+        "scipy.io": [
+            "loadmat",
+            "savemat"
+        ],
+        "scipy.linalg": [
+            "lu"
+        ],
+        "scipy.signal": [
+            "resample",
+            "periodogram",
+            "argrelmax",
+            "argrelmin",
+            "firls",
+            "freqz"
+        ],
+        "scipy.special": [
+            "sindg",
+            "cosdg",
+            "tandg"
+        ],
+        "struct": [
+            "unpack",
+            "pack"
+        ],
+        "time": [
+            "sleep"
         ],
         "tqdm": [
-            "trange"
+            "trange",
+            "tqdm"
+        ],
+        "types": [
+            "SimpleNamespace"
+        ],
+        "typing": [
+            "NamedTuple",
+            "Optional",
+            "Union",
+            "Iterable",
+            "Callable",
+            "Literal",
+            "Any"
         ]
     }
 }
-
