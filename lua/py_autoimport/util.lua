@@ -40,8 +40,10 @@ local function tbl_deep_extend(dst, src)
 end
 
 function M.setup(opts)
+  -- Apply user options by deep merging into default config
+  -- NOTE: Previous code ignored the merged result, so overrides were not applied.
   if opts and type(opts) == 'table' then
-    tbl_deep_extend(M.config, opts)
+    M.config = tbl_deep_extend(M.config, opts)
   end
 end
 
