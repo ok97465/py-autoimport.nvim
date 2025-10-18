@@ -1,5 +1,5 @@
 -- init: main entry for py-autoimport.nvim
--- Detect undefined names via pylsp diagnostics and auto-insert imports
+-- Detect undefined names via Ruff diagnostics and auto-insert imports
 
 local util = require('py_autoimport.util')
 
@@ -9,37 +9,57 @@ function M.setup(opts)
   util.setup(opts or {})
 end
 
--- Heuristic keyword/builtin tables removed: pylsp diagnostics are authoritative
+-- Ruff diagnostics are treated as the single source of truth for undefined symbols
 
--- Extract undefined names from pylsp/pyflakes diagnostics
-local function undefined_from_pylsp()
-  -- Ensure pylsp client is available for this buffer
-  local has_pylsp = false
-  local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
-  if get_clients then
-    local list = get_clients({ bufnr = 0, name = 'pylsp' }) or {}
-    has_pylsp = #list > 0
+-- Extract symbol name fragments from Ruff diagnostic messages
+local function extract_name_from_message(msg)
+  if type(msg) ~= 'string' or msg == '' then
+    return nil
   end
-  if not has_pylsp then
-    util.error('pylsp is not attached to this buffer')
-    return {}
+  local patterns = {
+    "[Uu]ndefined name [`'\"]([%w_%.]+)[`'\"]",
+    "[Uu]ndefined variable [`'\"]([%w_%.]+)[`'\"]",
+    "[Nn]ame [`'\"]([%w_%.]+)[`'\"] is not defined",
+    "[Nn]ame [`'\"]([%w_%.]+)[`'\"] is undefined",
+    "[Uu]ndefined name:?[%s]+([%w_%.]+)",
+    "[Uu]ndefined variable:?[%s]+([%w_%.]+)",
+  }
+  for _, pattern in ipairs(patterns) do
+    local match = msg:match(pattern)
+    if match then
+      return match
+    end
   end
+  local plain = msg:match("^([%w_%.]+) is not defined")
+  if plain then
+    return plain
+  end
+  return nil
+end
 
+-- Extract undefined names from Ruff diagnostics
+local function undefined_from_ruff()
   local diags = vim.diagnostic.get(0)
   local names, seen = {}, {}
   for _, d in ipairs(diags or {}) do
-    local src = (d.source or '')
-    local code = tostring(d.code or '')
+    local src = type(d.source) == 'string' and d.source or ''
+    local code = d.code
+    if not code and d.user_data and d.user_data.lsp then
+      code = d.user_data.lsp.code
+    end
+    code = tostring(code or '')
+    local code_upper = code:upper()
     local msg = (d.message or '')
-    local is_pyflakes = (src == 'pyflakes' or src == 'pylsp' or src == 'pylsp.plugins.pyflakes')
+    local src_l = src:lower()
+    local is_ruff = src_l:find('ruff', 1, true) ~= nil or code_upper:match('^[FE]%d+$') ~= nil
     local lower = msg:lower()
-    local is_undefined = (code == 'F821') or lower:find('undefined name', 1, true) or lower:find('is not defined', 1, true)
-    if is_pyflakes and is_undefined then
-      -- Try to extract the symbol name from the message
-      local name = msg:match("undefined name ['\"]([%w_%.]+)['\"]")
-                 or msg:match("name ['\"]([%w_%.]+)['\"] is not defined")
-                 or msg:match('undefined name ([%w_%.]+)')
-                 or msg:match('^([%w_%.]+) is not defined')
+    local is_undefined = (code_upper == 'F821')
+      or lower:find('undefined name', 1, true)
+      or lower:find('undefined variable', 1, true)
+      or lower:find('is not defined', 1, true)
+    if is_ruff and is_undefined then
+      -- Extract the symbol name from the Ruff diagnostic text
+      local name = extract_name_from_message(msg)
       if name and not seen[name] then
         table.insert(names, name)
         seen[name] = true
@@ -121,14 +141,14 @@ function M.auto_import()
     return
   end
 
-  -- Collect undefined names from pylsp diagnostics
-  local undefined = undefined_from_pylsp()
+  -- Collect undefined names from Ruff diagnostics
+  local undefined = undefined_from_ruff()
 
   if #undefined == 0 then
     -- still allow running isort if configured
     local cmd = util.get_config().insert.isort_command
     if cmd and #cmd > 0 then pcall(vim.api.nvim_command, cmd) end
-    util.info('No undefined names from pylsp')
+    util.info('No undefined names from Ruff diagnostics')
     return
   end
 

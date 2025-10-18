@@ -4,7 +4,7 @@ Auto-import undefined Python symbols from your workspace. Neovim 0.11+ only.
 
 ## Overview
 
-- Detects undefined names via pylsp (pyflakes F821) diagnostics in the current buffer.
+- Detects undefined names via Ruff (pyflakes F821) diagnostics in the current buffer.
 - First tries project JSON maps (`autoimport_for_python.json`, `autoimport_for_project.json`) to import known aliases/modules (e.g., `np` -> `import numpy as np`). If not found, searches the workspace with ripgrep for top-level definitions and inserts an appropriate `from pkg.mod import Name`.
 - Respects isort section headers when present (`pyproject.toml`, `.isort.cfg`, `setup.cfg`, `tox.ini`).
 - Falls back to default headers (including `# %% Import`).
@@ -12,7 +12,7 @@ Auto-import undefined Python symbols from your workspace. Neovim 0.11+ only.
 ## Requirements
 
 - Neovim 0.11+
-- python-lsp-server (`pylsp`) running for the buffer
+- Ruff diagnostics exposed to Neovim (e.g., via the `ruff` server)
 - ripgrep (`rg`) in your `PATH`
 - Optional: `vim-isort` (or any command that formats/import-sorts), default command: `Isort`
 
@@ -49,26 +49,24 @@ require('py_autoimport').setup({
 })
 ```
 
-### pylsp Setup (nvim-lspconfig)
+### Ruff Server Setup (vim.lsp)
 
-Enable pylsp with pyflakes diagnostics so this plugin can read F821 undefined-name reports.
+Ensure the Ruff language server is attached so this plugin can read F821 undefined-name reports.
 
 ```lua
--- Minimal pylsp configuration with pyflakes enabled
-require('lspconfig').pylsp.setup({
-  settings = {
-    pylsp = {
-      plugins = {
-        pyflakes = { enabled = true },  -- required for F821 undefined-name
-        pycodestyle = { enabled = false }, -- optional: reduce noise
-        mccabe = { enabled = false },      -- optional
-        pylint = { enabled = false },      -- optional
-        autopep8 = { enabled = false },    -- optional
-        yapf = { enabled = false },        -- optional
-      },
+local ruff_inline_config = {
+  -- Optional Ruff settings; adjust to your project needs.
+}
+
+vim.lsp.config('ruff', {
+  init_options = {
+    settings = {
+      configuration = ruff_inline_config,
     },
   },
 })
+
+vim.lsp.enable('ruff')
 ```
 
 ## Usage
@@ -77,7 +75,7 @@ require('lspconfig').pylsp.setup({
 :PyAutoImport
 ```
 
-- Scans the current buffer for undefined names reported by pylsp, searches the workspace, inserts imports, then runs `Isort` if configured.
+- Scans the current buffer for undefined names reported by Ruff, searches the workspace, inserts imports, then runs `Isort` if configured.
 - JSON maps take precedence; if both JSONs are missing or no match exists, workspace search is used. When both JSONs are present, their union is used (project overrides per-key).
 - If multiple matches exist, the first match is used (closest to project root). Improvements like interactive selection can be added later.
 
@@ -122,5 +120,5 @@ Notes:
 
 ## Notes
 
-- Requires pylsp to be attached to the buffer; no Treesitter is required.
+- Requires Ruff diagnostics to be available for the buffer; no Treesitter is required.
 - Errors are reported via `vim.notify` under the title `py-autoimport`.
